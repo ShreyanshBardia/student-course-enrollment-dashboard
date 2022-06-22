@@ -1,0 +1,51 @@
+{% extends "layout.html"%}
+
+{% block content %}
+
+<h1 style=" text-align: center;">Course Details </h1>
+<table id="course-detail">
+    <thead>
+        <tr>
+            <th>Course Code</th>
+            <th>Course Name</th>
+            <th>Course Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{c.course_code}}</td>
+            <td>{{c.course_name}}</td>
+            <td>{{c.course_desc}}</td>
+        </tr>
+    </tbody>
+</table>
+
+{% if l|length>0 %}
+<h1 style=" text-align: center;">Enrollment list </h1>
+<table id="course-table">
+    <thead>
+        <tr>
+            <th>SNo</th>
+            <th>Roll Number</th>
+            <th>Student First Name</th>
+            <th>Student Last Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for s in l %}
+        <tr>
+            <td>{{s.student_id}}</td>
+            <td>{{s.roll_number}}</td>
+            <td>{{s.first_name}}</td>
+            <td>{{s.last_name}}</td>
+        </tr>
+
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endif %}
+
+<a href="{{ url_for('course_list') }}">Go Back</a>
+
+{% endblock content %}

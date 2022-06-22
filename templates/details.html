@@ -1,0 +1,56 @@
+{% extends "layout.html"%}
+
+{% block content %}
+
+<h1 style=" text-align: center;">Student Details </h1>
+<table id='student-detail'>
+    <thead>
+        <tr>
+            <th>Roll Number</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{roll_number}}</td>
+            <td>{{first_name}}</td>
+            <td>{{last_name}}</td>
+        </tr>
+    </tbody>
+</table>
+
+
+{% if courses_taken|length>0 %}
+<h1 style=" text-align: center;">Enrollment list </h1>
+<table id="student-enrollments">
+    <thead>
+        <tr>
+            <th>SNo</th>
+            <th>Course Code</th>
+            <th>Course Name</th>
+            <th>Course Description</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for c in courses_taken %}
+        <tr>
+            <td>{{c[0]}}</td>
+            <td>{{c[1]}}</td>
+            <td>{{c[2]}}</td>
+            <td>{{c[3]}}</td>
+            <td>
+                
+                <a href="{{ url_for('withdraw_enroll', student_id=student_id,course_id=c[0])}}">Withdraw</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endif %}
+
+<a href="{{ url_for('index') }}">Go Back</a>
+
+{% endblock content %}

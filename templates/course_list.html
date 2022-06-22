@@ -1,0 +1,39 @@
+
+{% extends "layout.html"%}
+
+{% block content %}
+<h1>Courses list</h1>
+
+<a href="{{ url_for('index') }}">Go to Students</a>
+{% if l|length >0 %}
+
+<table id="all-courses">
+    <tr>
+        <th>SNo</th>
+        <th>Course Code</th>
+        <th>Course Name</th>
+        <th>Course Description</th>
+        <th>Actions</th>
+    </tr>
+    {% for c in l %}
+
+    <tr>
+        <td>{{c.course_id}}</td>
+        
+        <td><a href="{{ url_for('course_details',course_id=c.course_id)}}">{{c.course_code}}</a></td>
+        <td>{{c.course_name}}</td>
+        <td>{{c.course_description}}</td>
+        <td>
+            <a href="{{ url_for('course_update',course_id=c.course_id)}}">Update</a>
+            <a href="{{ url_for('course_delete',course_id=c.course_id)}}">Delete</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% else %}
+    <p>No courses found. Add the courses now!</p>
+{% endif %}
+
+<a href="{{ url_for('new_course') }}">+Add Course</a>
+{% endblock content %}
